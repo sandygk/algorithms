@@ -12,8 +12,8 @@ def dfs(node, graph, visited):
     dfs(neighbor, graph, visited)
 ```
 
-* Time complexity: `O(E+V)`
-* Space complexity: `O(V)`
+* **Time complexity**: $(E+V)$
+* **Space complexity**: $O(V)$
 
 ### Breadth-First Search (BFS)
 
@@ -30,8 +30,8 @@ def bfs(start, graph):
           queue.append(v)
 ```
 
-* Time complexity: `O(E+V)`
-* Space complexity: `O(V)`
+* **Time complexity**: $O(E+V)$
+* **Space complexity**: $O(V)$
 
 ## Disjoint Set
 
@@ -53,10 +53,10 @@ class DisjointSet:
     return False
 ```
 
-* Time complexity: the construction is `O(n)` and both *find* and *union* are `O(log(n))`
-* Space complexity: `O(n)`
+* **Time complexity**: the construction is $O(n)$ and both *find* and *union* are $O(log(n))$
+* **Space complexity**: $O(n)$
 
-There is an optimization called *Union by Rank* where the *find* and *union* are almost `O(1)`. The idea is to keep track of the depth (or rank) of each tree and on the *union* operation use the set with higer rank as parent of the other.
+There is an optimization called *Union by Rank* where the *find* and *union* are almost $O(1)$. The idea is to keep track of the depth (or rank) of each tree and on the *union* operation use the set with higer rank as parent of the other.
 
 ## Minimum Spanning Tree
 
@@ -78,8 +78,8 @@ def prim(graph):
   return treeWeight
 ```
 
-* Time Complexity: `O(E * log(V))` with a binary heap
-* Space Complexity: `O(V)`
+* **Time complexity**: $O(E * log(V))$ with a binary heap.
+* **Space complexity**: $O(V)$
 
 ### Kruskal's Algorithm
 
@@ -100,8 +100,8 @@ def kruskal(graph):
         return treeWeight
 ```
 
-* Time Complexity: `O(E * log(E))`
-* Space Complexity: `O(V)`
+* **Time complexity**: $O(E * log(E))$
+* **Space complexity**: $O(V)$
 
 **Note:** Kruskal's algorithm implementation is a bit larger than Prim's because it requires the implementation of a Disjoint Set
 
@@ -125,8 +125,8 @@ def dijkstra(start, graph):
   return dist
 ```
 
-* Time Complexity: `O(E * log(V))` with a binary heap
-* Space Complexity: `O(V)`
+* **Time complexity**: $O(E * log(V))$ with a binary heap.
+* **Space complexity**: $O(V)$
 
 ### Bellman-Ford Algorithm
 
@@ -142,8 +142,8 @@ def bellmanFord(start, k, n, edges):
   return dist
 ```
 
-* Time Complexity: `O(V * E))` with a binary heap
-* Space Complexity: `O(V)`
+* **Time complexity**: $O(V * E))$ with a binary heap
+* **Space complexity**: $O(V)$
 
 **Notes:**
 
@@ -153,7 +153,7 @@ def bellmanFord(start, k, n, edges):
 
 ### Shortest Path Faster Algorithm (SPFA)
 
-Same as Bellman-Ford but faster (same time and space complexity though). It can't detect negative cost cycles.
+Same as Bellman-Ford but faster (same time and **Space complexity** though). It can't detect negative cost cycles.
 
 ```python
 def spfa(start, graph):
@@ -173,8 +173,8 @@ def spfa(start, graph):
           queue.append(v)
 ```
 
-* Time Complexity: `O(V * E))` with a binary heap
-* Space Complexity: `O(V)`
+* **Time complexity**: $O(V * E))$ with a binary heap
+* **Space complexity**: $O(V)$
 
 ### Floyd-Warshall algorithm
 
@@ -194,5 +194,5 @@ def floydWarshall(n, edges:
   return dist
 ```
 
-* Time Complexity: `O(V^3))` with a binary heap
-* Space Complexity: `O(V^2)`
+* **Time complexity**: $O(V^3))$
+* **Space complexity**: $O(V^2)$
