@@ -147,13 +147,13 @@ def bellmanFord(start, k, n, edges):
 
 **Notes:**
 
-- The algorithm can be improved by stopping if there weren't any changes on a given iteration of the main loop.
-- It can be modified to detect if there are cycles of negative cost, with an extra iteration at the end, if there are changes then there is a cycle of negative costs.
-- And it can be modified to compute the shortest lengths in k steps with an extra array to store the results of the previous iteration.
+- The algorithm can be improved by **stopping if there weren't any changes** on a given iteration of the main loop.
+- It can be modified to detect if there are **negative cycles** with an extra iteration at the end, if there are changes then there is a negative cycle.
+- And it can be modified to compute the **shortest lengths in k steps** with an extra array to store the results of the previous iteration.
 
 ### Shortest Path Faster Algorithm (SPFA)
 
-Same as Bellman-Ford but faster (same time and **Space complexity** though). It can't detect negative cost cycles.
+Same as Bellman-Ford but faster (same time and space complexity though). It can't detect negative cost cycles.
 
 ```python
 def spfa(start, graph):
@@ -173,7 +173,7 @@ def spfa(start, graph):
           queue.append(v)
 ```
 
-* **Time complexity**: $O(V * E))$ with a binary heap
+* **Time complexity**: $O(V * E))$ with a binary heap.
 * **Space complexity**: $O(V)$
 
 ### Floyd-Warshall algorithm
@@ -194,5 +194,33 @@ def floydWarshall(n, edges:
   return dist
 ```
 
-* **Time complexity**: $O(V^3))$
+* **Time complexity**: $O(V^3)$
 * **Space complexity**: $O(V^2)$
+
+**Notes:**
+
+- The algorithm can be modified to **compute the paths** themselve with an extra matrix `next` where `next[u][v]` stores the next node on the path from `u` to `v` . See explanation [here]([Floyd–Warshall algorithm - Wikipedia](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm#Path_reconstruction)).
+-  To detect **negative cycles** one can inspect the diagonal of the path matrix, and the presence of a negative number indicates that the graph contains at least one negative cycle.
+
+## Topollogical Sort
+
+```python
+def topollogicalSort(dag):
+  n = len(dag)
+  inDegree = Counter()
+  for u in range(n):
+    for v in dag(u):
+      inDegree[v] += 1
+  result = [u for u in range(n) if not inDegree[u]]
+  for u in result:
+    for v in dag[u]:
+      inDegree[v] -= 1
+      inDegree[v] or result.append(v)
+  return result if len(result) == n else []
+```
+
+* **Time Complexity**: $O(V+E)$
+
+* **Space Complexity**: $O(V+E)$
+
+## Strongly Connected Components
