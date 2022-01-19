@@ -200,9 +200,11 @@ def floydWarshall(n, edges:
 **Notes:**
 
 - The algorithm can be modified to **compute the paths** themselve with an extra matrix `next` where `next[u][v]` stores the next node on the path from `u` to `v` . See explanation [here]([Floyd–Warshall algorithm - Wikipedia](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm#Path_reconstruction)).
--  To detect **negative cycles** one can inspect the diagonal of the path matrix, and the presence of a negative number indicates that the graph contains at least one negative cycle.
+- To detect **negative cycles** one can inspect the diagonal of the path matrix, and the presence of a negative number indicates that the graph contains at least one negative cycle.
 
 ## Topollogical Sort
+
+The following algorithm is called *Kahn's Algorithm*.
 
 ```python
 def topollogicalSort(dag):
@@ -221,6 +223,6 @@ def topollogicalSort(dag):
 
 * **Time Complexity**: $O(V+E)$
 
-* **Space Complexity**: $O(V+E)$
+* **Space Complexity**: $O(V)$
 
 ## Strongly Connected Components
