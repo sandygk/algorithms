@@ -6,14 +6,20 @@
 
 ```python
 def dfs(node, graph, visited):
-  # process node
-  visited.add(node)
-  for neighbor in graph(node):
-    dfs(neighbor, graph, visited)
+  if node in visited:
+    # process node
+    visited.add(node)
+    for neighbor in graph(node):
+      dfs(neighbor, graph, visited)
 ```
 
 * **Time complexity**: $(E+V)$
 * **Space complexity**: $O(V)$
+
+**Notes:**
+
+- The *DFS*  can be used to **detect cycles**, finding back edges on a dfs <=> cycles.
+- The algorithm can also **detect if the graph is bipartite**, back edges should go from an odd depth node to an even depth node or viceversa, i.e. (for each back edge u->v, depth(u)-depth(v) should be odd.
 
 ### Breadth-First Search (BFS)
 
@@ -68,13 +74,13 @@ def prim(graph):
   heap = [(0, 0)] # w, u
   visited = set()
   while heap:
-    w, u = heapq.heappop(heap)
+    w, u = heappop(heap)
     if u in visited: continue
     visited.add(u)
     treeWeight += w
     for v, w in graph(u):
       if v in visited: continue
-      heapq.heappush(heap, (w, v))
+      heappush(heap, (w, v))
   return treeWeight
 ```
 
@@ -116,12 +122,12 @@ def dijkstra(start, graph):
   heap = [(start, k)]
   dist = {}
   while heap:
-    d, u = heapq.heappop(heap)
+    d, u = heappop(heap)
     if u not in dist:
       dist[u] = d
       for v, w in neighbors[u]:
         if v not in dist:
-          heapq.heappush(heap, (d + w, v))
+          heappush(heap, (d + w, v))
   return dist
 ```
 
@@ -159,7 +165,7 @@ Same as Bellman-Ford but faster (same time and space complexity though). It can'
 def spfa(start, graph):
   dist = [inf] * n
   dist[start] = 0
-  queue = collections.deque([start])
+  queue = deque([start])
   inQueue = set([start])
   while queue:
     u = queue.popleft()
@@ -204,18 +210,18 @@ def floydWarshall(n, edges:
 
 ## Topollogical Sort
 
-The following algorithm is called *Kahn's Algorithm*.
+### Kahn's Algorithm
 
 ```python
-def topollogicalSort(dag):
-  n = len(dag)
+def kahn(graph):
+  n = len(graph)
   inDegree = Counter()
   for u in range(n):
-    for v in dag(u):
+    for v in graph(u):
       inDegree[v] += 1
   result = [u for u in range(n) if not inDegree[u]]
   for u in result:
-    for v in dag[u]:
+    for v in graph[u]:
       inDegree[v] -= 1
       inDegree[v] or result.append(v)
   return result if len(result) == n else []
@@ -225,4 +231,32 @@ def topollogicalSort(dag):
 
 * **Space Complexity**: $O(V)$
 
-## Strongly Connected Components
+### Using DFS
+
+```python
+def topollogicalSort(graph):
+  n = len(graph)
+  result = []
+  visited = set()
+  for u in range(n):
+    dfs(u, graph, visited, result)
+  result.reverse()
+  return result
+
+def dfs(node, graph, visited, result):
+  if node not in visited:
+    visited.add(node)
+    for neighbor in graph(node):
+      dfs(neighbor, graph, visited)
+    result.append(node)
+```
+
+- **Time Complexity**: O(V+E)
+
+- **Space Complexity**: O(V)
+
+## Pending
+
+* Strongly connected components
+
+* Lower common ancestor

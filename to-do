@@ -1,0 +1,13 @@
+Binary trees
+  Morris traversal
+  binary tree from preorder and inorder
+  lca
+
+Python
+  Counter
+  heapq
+  iterate a list 2 times at a time
+  for current, next in zip(list, list[1:]):
+  string formatting
+  lru_cache
+  list operations (functions similar to zip)
